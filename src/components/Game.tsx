@@ -1,17 +1,17 @@
-import { useState } from 'react';
-import { EndScreen } from './EndScreen';
 import { Menu } from './Menu';
 import { Play } from './Play';
+import { EndScreen } from './EndScreen';
 import { useMemoryCatContext } from '../context/memoryCatContext';
 
 export const Game = () => {
   const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
+  const { state } = stateMemoryCat;
 
   return (
     <>
-      {stateMemoryCat.state === 'menu' && <Menu />}
-      {stateMemoryCat.state === 'play' && <Play />}
-      {stateMemoryCat.state === 'end' && <EndScreen />}
+      {state === 'menu' && <Menu />}
+      {state === 'play' && <Play />}
+      {state === 'end' && <EndScreen />}
     </>
   );
 };

@@ -3,6 +3,7 @@ import { useMemoryCatContext } from '../context/memoryCatContext';
 
 export const EndScreen = () => {
   const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
+  const { bestTime, time } = stateMemoryCat;
 
   const handleClickAgain = () => {
     dispatchMemoryCat({
@@ -21,15 +22,15 @@ export const EndScreen = () => {
   return (
     <div className="mb-24 flex-auto flex flex-col justify-center items-center gap-8">
       <h2 className="text-4xl">Game ended!</h2>
-      {stateMemoryCat.bestTime !== 'none' && (
+      {bestTime !== 'none' && (
         <div className="flex flex-col justify-center items-center text-xl">
           <p>Best time</p>
-          <p>{stateMemoryCat.bestTime}</p>
+          <p>{bestTime}</p>
         </div>
       )}
       <div className="flex flex-col justify-center items-center text-xl">
         <p>Current time</p>
-        <p>{stateMemoryCat.time}</p>
+        <p>{time}</p>
       </div>
       <div className="flex gap-8">
         <Button
