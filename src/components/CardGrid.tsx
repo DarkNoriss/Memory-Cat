@@ -6,7 +6,8 @@ import { CatCard } from './CatCard';
 
 export type CardsArrayType = {
   id: number;
-  img: number;
+  imgId: number;
+  guessed: boolean;
 };
 
 export const CardGrid = () => {
@@ -23,7 +24,8 @@ export const CardGrid = () => {
           const imgId = generateRandomNumber(usedImages);
           return Array.from({ length: cardsToGuess }, () => ({
             id: i,
-            img: imgId,
+            imgId: imgId,
+            guessed: false,
           }));
         }).flat();
 
@@ -46,7 +48,7 @@ export const CardGrid = () => {
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice(0, cardsList.length / 4).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
@@ -55,7 +57,7 @@ export const CardGrid = () => {
               .slice(cardsList.length / 4, (cardsList.length * 2) / 4)
               .map((card, index) => (
                 <Grid2 key={index}>
-                  <CatCard card={card} />
+                  <CatCard index={index} card={card} />
                 </Grid2>
               ))}
           </Grid2>
@@ -64,14 +66,14 @@ export const CardGrid = () => {
               .slice((cardsList.length * 2) / 4, (cardsList.length * 3) / 4)
               .map((card, index) => (
                 <Grid2 key={index}>
-                  <CatCard card={card} />
+                  <CatCard index={index} card={card} />
                 </Grid2>
               ))}
           </Grid2>
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice((cardsList.length * 3) / 4).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
@@ -81,7 +83,7 @@ export const CardGrid = () => {
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice(0, cardsList.length / 3).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
@@ -90,14 +92,14 @@ export const CardGrid = () => {
               .slice(cardsList.length / 3, (cardsList.length * 2) / 3)
               .map((card, index) => (
                 <Grid2 key={index}>
-                  <CatCard card={card} />
+                  <CatCard index={index} card={card} />
                 </Grid2>
               ))}
           </Grid2>
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice((cardsList.length * 2) / 3).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
@@ -107,14 +109,14 @@ export const CardGrid = () => {
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice(0, cardsList.length / 2).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
           <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
             {cardsList.slice(cardsList.length / 2).map((card, index) => (
               <Grid2 key={index}>
-                <CatCard card={card} />
+                <CatCard index={index} card={card} />
               </Grid2>
             ))}
           </Grid2>
@@ -123,7 +125,7 @@ export const CardGrid = () => {
         <Grid2 container spacing={4} style={{ justifyContent: 'center' }}>
           {cardsList.map((card, index) => (
             <Grid2 key={index}>
-              <CatCard card={card} />
+              <CatCard index={index} card={card} />
             </Grid2>
           ))}
         </Grid2>
