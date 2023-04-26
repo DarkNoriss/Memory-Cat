@@ -10,6 +10,7 @@ const MemoryCatContext = createContext<MemoryCatContextType | null>(null);
 
 export type MemoryCatType = {
   cards: number;
+  cardsToGuess: number;
   time: string;
   bestTime: string;
   state: string;
@@ -17,6 +18,7 @@ export type MemoryCatType = {
 
 const initialState: MemoryCatType = {
   cards: 5,
+  cardsToGuess: 2,
   time: '0',
   bestTime: 'none',
   state: 'menu',
