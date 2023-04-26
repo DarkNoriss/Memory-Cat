@@ -1,8 +1,9 @@
 import Button from '@mui/material/Button';
 import { useMemoryCatContext } from '../context/memoryCatContext';
+import { CardGrid } from './CardGrid';
 
 export const Play = () => {
-  const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
+  const { dispatchMemoryCat } = useMemoryCatContext();
 
   const handleClick = () => {
     dispatchMemoryCat({
@@ -13,8 +14,7 @@ export const Play = () => {
 
   return (
     <div className="mb-24 flex-auto flex flex-col justify-center items-center gap-8">
-      <h2>Play</h2>
-      <p>{stateMemoryCat.cards} cards</p>
+      <CardGrid />
       <Button
         style={{
           width: 250,
