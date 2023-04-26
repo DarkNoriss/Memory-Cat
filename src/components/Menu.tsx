@@ -30,7 +30,7 @@ export const Menu = () => {
           value={stateMemoryCat.cards}
           onChange={(e, value) => handleChange(value as number)}
           min={2}
-          max={20}
+          max={17}
         />
       </Box>
       <Button
