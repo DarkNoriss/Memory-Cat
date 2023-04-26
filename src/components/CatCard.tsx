@@ -1,33 +1,34 @@
 import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { CardsArrayType } from './CardGrid';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import CardContent from '@mui/material/CardContent';
+import { CSSTransition } from 'react-transition-group';
+import '../styles/card.css';
 
 type CatCardProps = {
   card: CardsArrayType;
 };
 
-export const CatCard: React.FC<CatCardProps> = ({ card }) => {
-  const { img } = card;
-  const [isFlipped, setIsFlipped] = useState<Boolean>(false);
+export const CatCard: React.FC<CatCardProps> = ({ card: { img } }) => {
+  const [isFlipped, setIsFlipped] = useState<boolean>(true);
 
   const handleClick = () => {
     setIsFlipped(!isFlipped);
   };
 
   return (
-    <Card onClick={handleClick}>
-      {isFlipped && (
-        <CardMedia
-          sx={{ height: 150, width: 100 }}
-          component="img"
-          image={`/assets/cards/${img}.png`}
-        />
-      )}
-      {!isFlipped && (
-        <CardContent sx={{ height: 150, width: 100 }} style={{ backgroundColor: 'green' }} />
-      )}
+    <Card
+      className="flippable-card-container"
+      style={{ backgroundColor: 'transparent' }}
+      onClick={handleClick}
+    >
+      <CSSTransition in={isFlipped} timeout={600} classNames="flip">
+        <div className="card">
+          <CardMedia className="card-back" component="img" image={`assets/cards/${img}.png`} />
+          <CardContent className="card-front" />
+        </div>
+      </CSSTransition>
     </Card>
   );
 };
