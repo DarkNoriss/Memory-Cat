@@ -1,33 +1,40 @@
-import Button from '@mui/material/Button';
 import { useMemoryCatContext } from '../context/memoryCatContext';
 import { CardGrid } from './CardGrid';
+import { useEffect } from 'react';
 
 export const Play = () => {
-  const { dispatchMemoryCat } = useMemoryCatContext();
+  const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
+  const { cards } = stateMemoryCat;
 
-  const handleClick = () => {
-    dispatchMemoryCat({
-      type: 'setState',
-      payload: 'end',
-    });
-  };
+  useEffect(() => {
+    setTimeout(() => {
+      const { picked } = cards;
+      if (picked.length === 2) {
+        if (picked[0] === picked[1]) {
+          dispatchMemoryCat({
+            type: 'setGuessedCards',
+          });
+        } else {
+          dispatchMemoryCat({
+            type: 'hideFlippedCards',
+          });
+        }
+      }
+      if (cards.list.length > 0) {
+        const checkWinningCond = cards.list.every((card) => card.guessed === true);
+        if (checkWinningCond) {
+          dispatchMemoryCat({
+            type: 'setState',
+            payload: 'end',
+          });
+        }
+      }
+    }, 600);
+  }, [cards.list]);
 
   return (
     <div className="mb-24 flex-auto flex flex-col justify-center items-center gap-8">
       <CardGrid />
-      <Button
-        style={{
-          width: 250,
-          fontWeight: 600,
-          fontSize: 16,
-          padding: '10px 20px',
-          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
-        }}
-        variant="outlined"
-        onClick={handleClick}
-      >
-        Finish the game
-      </Button>
     </div>
   );
 };
