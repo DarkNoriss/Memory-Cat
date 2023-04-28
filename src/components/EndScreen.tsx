@@ -7,12 +7,18 @@ export const EndScreen = () => {
 
   const handleClickAgain = () => {
     dispatchMemoryCat({
+      type: 'clearBoard',
+    });
+    dispatchMemoryCat({
       type: 'setState',
       payload: 'play',
     });
   };
 
   const handleClickSettings = () => {
+    dispatchMemoryCat({
+      type: 'clearBoard',
+    });
     dispatchMemoryCat({
       type: 'setState',
       payload: 'menu',
