@@ -4,26 +4,27 @@ import { CatCard } from './CatCard';
 
 export const CardGrid = () => {
   const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
-  const { cardsNumber, cardsToGuess, cards } = stateMemoryCat;
-  const { list } = cards;
-  const isMounted = useRef(false);
+  const {
+    totalCards,
+    cardsToMatch,
+    cardsData: { cardList },
+  } = stateMemoryCat;
+  const isComponentMounted = useRef(false);
 
   useEffect(() => {
-    if (!isMounted.current) {
+    if (!isComponentMounted.current) {
       dispatchMemoryCat({
         type: 'CREATE_CARDS',
       });
     }
-    isMounted.current = true;
-  }, [cardsNumber, cardsToGuess]);
+    isComponentMounted.current = true;
+  }, [totalCards, cardsToMatch]);
 
   return (
     <div className="flex justify-center">
       <div className="flex flex-wrap justify-center w-full gap-4 max-w-6xl">
-        {list.map((card, index) => (
-          <div key={index}>
-            <CatCard index={index} card={card} />
-          </div>
+        {cardList.map((card, index) => (
+          <CatCard key={index} index={index} card={card} />
         ))}
       </div>
     </div>

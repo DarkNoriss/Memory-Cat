@@ -2,8 +2,9 @@ import Card from '@mui/material/Card';
 import CardMedia from '@mui/material/CardMedia';
 import { useRef } from 'react';
 import { CSSTransition } from 'react-transition-group';
+import { useMemoryCatContext } from '../context/memoryCatContext';
+import { CardsArrayType } from '../types/CatTypes';
 import '../styles/card.css';
-import { CardsArrayType, useMemoryCatContext } from '../context/memoryCatContext';
 
 type CatCardProps = {
   index: number;
@@ -16,8 +17,8 @@ export const CatCard: React.FC<CatCardProps> = ({ index, card }) => {
   const nodeRef = useRef(null);
 
   function throttle(func: any, limit: number) {
-    let lastFunc: ReturnType<typeof setTimeout> | null;
-    let lastRan: number | null;
+    let lastFunc: ReturnType<typeof setTimeout>;
+    let lastRan: number;
 
     return (...args: any[]): void => {
       if (!lastRan) {
@@ -36,17 +37,15 @@ export const CatCard: React.FC<CatCardProps> = ({ index, card }) => {
   }
 
   const flipCard = () => {
-    if (!guessed) {
-      if (!flipped) {
-        dispatchMemoryCat({
-          type: 'FLIP_CARD',
-          payload: { index, id },
-        });
-      }
+    if (!guessed && !flipped) {
+      dispatchMemoryCat({
+        type: 'FLIP_CARD',
+        payload: { index, id },
+      });
     }
   };
 
-  const throttledFlipCard = throttle(flipCard, 500);
+  const throttledFlipCard = throttle(flipCard, 600);
 
   return (
     <Card

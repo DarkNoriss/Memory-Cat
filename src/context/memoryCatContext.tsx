@@ -1,5 +1,6 @@
 import { ReactNode, createContext, useContext, useReducer } from 'react';
 import { memoryCatReducer } from '../utils/memoryCatReducer';
+import { MemoryCatType } from '../types/CatTypes';
 
 type MemoryCatContextType = {
   stateMemoryCat: MemoryCatType;
@@ -8,38 +9,16 @@ type MemoryCatContextType = {
 
 const MemoryCatContext = createContext<MemoryCatContextType | null>(null);
 
-export type MemoryCatType = {
-  cardsNumber: number;
-  cardsToGuess: number;
-  time: string;
-  bestTime: string;
-  state: string;
-  cards: CardType;
-};
-
-type CardType = {
-  picked: number[];
-  pickedId: number[];
-  list: CardsArrayType[];
-};
-
-export type CardsArrayType = {
-  id: number;
-  imgId: number;
-  guessed: boolean;
-  flipped: boolean;
-};
-
 const initialState: MemoryCatType = {
-  cardsNumber: 5,
-  cardsToGuess: 2,
-  time: '0',
-  bestTime: 'none',
-  state: 'menu',
-  cards: {
-    picked: [],
-    pickedId: [],
-    list: [],
+  totalCards: 5,
+  cardsToMatch: 2,
+  elapsedTime: '0',
+  bestRecordTime: 'none',
+  gameStatus: 'GAME_MENU',
+  cardsData: {
+    selectedCards: [],
+    selectedCardIds: [],
+    cardList: [],
   },
 };
 

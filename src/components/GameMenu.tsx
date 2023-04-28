@@ -2,21 +2,22 @@ import Box from '@mui/material/Box';
 import Slider from '@mui/material/Slider';
 import Button from '@mui/material/Button';
 import { useMemoryCatContext } from '../context/memoryCatContext';
+import { buttonStyle } from '../styles/button';
 
-export const Menu = () => {
+export const GameMenu = () => {
   const { stateMemoryCat, dispatchMemoryCat } = useMemoryCatContext();
 
-  const handleChange = (value: number) => {
+  const updateCardsNumber = (value: number) => {
     dispatchMemoryCat({
-      type: 'SET_CARDS',
+      type: 'UPDATE_CARDS_NUMBER',
       payload: value,
     });
   };
 
-  const handleClick = () => {
+  const updateGameState = () => {
     dispatchMemoryCat({
-      type: 'setState',
-      payload: 'play',
+      type: 'UPDATE_GAME_STATE',
+      payload: 'GAME_PLAY',
     });
   };
 
@@ -24,26 +25,17 @@ export const Menu = () => {
     <div className="mb-24 flex-auto flex flex-col justify-center items-center gap-8">
       <h2 className="text-4xl">How many cards do you want to play with?</h2>
       <Box width={400}>
+        <p id="sliderLabel">Select the number of cards:</p>
         <Slider
-          aria-label="Default"
+          aria-labelledby="sliderLabel"
           valueLabelDisplay="auto"
-          value={stateMemoryCat.cardsNumber}
-          onChange={(e, value) => handleChange(value as number)}
+          value={stateMemoryCat.totalCards}
+          onChange={(e, value) => updateCardsNumber(value as number)}
           min={2}
           max={17}
         />
       </Box>
-      <Button
-        style={{
-          width: 250,
-          fontWeight: 600,
-          fontSize: 16,
-          padding: '10px 20px',
-          boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.25)',
-        }}
-        variant="outlined"
-        onClick={handleClick}
-      >
+      <Button className={buttonStyle()} variant="outlined" onClick={updateGameState}>
         Start the game
       </Button>
     </div>
