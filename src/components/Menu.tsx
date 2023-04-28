@@ -8,7 +8,7 @@ export const Menu = () => {
 
   const handleChange = (value: number) => {
     dispatchMemoryCat({
-      type: 'setCards',
+      type: 'SET_CARDS',
       payload: value,
     });
   };
@@ -27,7 +27,7 @@ export const Menu = () => {
         <Slider
           aria-label="Default"
           valueLabelDisplay="auto"
-          value={stateMemoryCat.cards}
+          value={stateMemoryCat.cardsNumber}
           onChange={(e, value) => handleChange(value as number)}
           min={2}
           max={17}
