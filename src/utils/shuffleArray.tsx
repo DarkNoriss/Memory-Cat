@@ -1,4 +1,4 @@
-import { CardsArrayType } from '../context/memoryCatContext';
+import { CardsArrayType } from '../types/CatTypes';
 
 export const shuffleArray = (array: CardsArrayType[]) => {
   return array
