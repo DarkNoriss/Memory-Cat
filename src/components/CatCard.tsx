@@ -30,6 +30,8 @@ export const CatCard: React.FC<CatCardProps> = ({ index, card }) => {
       className={`flippable-card-container ${guessed ? '' : 'cursor-pointer'}`}
       style={{ backgroundColor: 'transparent' }}
       onClick={flipCard}
+      draggable={true}
+      onDragStart={(event) => event.preventDefault()}
     >
       <CSSTransition nodeRef={nodeRef} in={!flipped} timeout={600} classNames="flip">
         <div ref={nodeRef} className="card">
