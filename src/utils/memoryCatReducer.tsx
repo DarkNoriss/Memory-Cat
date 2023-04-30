@@ -5,6 +5,7 @@ import { MemoryCatType, CardsArrayType } from '../types/CatTypes';
 
 type UpdateCardsNumberAction = { type: 'UPDATE_CARDS_NUMBER'; payload: number };
 type UpdateGameStateAction = { type: 'UPDATE_GAME_STATE'; payload: string };
+type UpdateTimer = { type: 'UPDATE_TIMER'; payload: number };
 type FlipCardAction = {
   type: 'FLIP_CARD';
   payload: {
@@ -16,15 +17,18 @@ type CreateCardsAction = { type: 'CREATE_CARDS' };
 type HideFlippedCardsAction = { type: 'HIDE_FLIPPED_CARDS' };
 type SetGuessedCardsAction = { type: 'SET_GUESSED_CARDS' };
 type ClearBoardAction = { type: 'CLEAR_BOARD' };
+type CheckBestTime = { type: 'CHECK_BEST_TIME' };
 
 type ActionTypes =
   | UpdateCardsNumberAction
   | UpdateGameStateAction
+  | UpdateTimer
   | FlipCardAction
   | CreateCardsAction
   | HideFlippedCardsAction
   | SetGuessedCardsAction
-  | ClearBoardAction;
+  | ClearBoardAction
+  | CheckBestTime;
 
 export const memoryCatReducer = (state: MemoryCatType, action: ActionTypes) => {
   return produce(state, (draftState) => {
@@ -76,12 +80,26 @@ export const memoryCatReducer = (state: MemoryCatType, action: ActionTypes) => {
         break;
 
       case 'UPDATE_GAME_STATE':
+        if (action.payload === 'GAME_PLAY') draftState.timerOn = true;
+        if (action.payload === 'GAME_END') draftState.timerOn = false;
+
         draftState.gameStatus = action.payload;
         break;
 
       case 'CLEAR_BOARD':
         draftState.cardsData.selectedCards = [];
         draftState.cardsData.cardList = [];
+        break;
+
+      case 'UPDATE_TIMER':
+        draftState.currentTime += action.payload;
+        break;
+
+      case 'CHECK_BEST_TIME':
+        if (draftState.currentTime < draftState.bestTime) {
+          console.log('prev bigger');
+          draftState.bestTime = draftState.currentTime;
+        }
         break;
 
       default:
