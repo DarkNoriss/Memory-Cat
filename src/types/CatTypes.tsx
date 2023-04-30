@@ -1,8 +1,9 @@
 export type MemoryCatType = {
   totalCards: number;
   cardsToMatch: number;
-  elapsedTime: string;
-  bestRecordTime: string;
+  currentTime: number;
+  timerOn: boolean;
+  bestTime: number;
   gameStatus: string;
   cardsData: CardType;
 };
