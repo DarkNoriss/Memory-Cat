@@ -16,26 +16,6 @@ export const CatCard: React.FC<CatCardProps> = ({ index, card }) => {
   const { id, imgId, guessed, flipped } = card;
   const nodeRef = useRef(null);
 
-  function throttle(func: any, limit: number) {
-    let lastFunc: ReturnType<typeof setTimeout>;
-    let lastRan: number;
-
-    return (...args: any[]): void => {
-      if (!lastRan) {
-        func(...args);
-        lastRan = Date.now();
-      } else {
-        if (lastFunc) clearTimeout(lastFunc);
-        lastFunc = setTimeout(() => {
-          if (Date.now() - (lastRan as number) >= limit) {
-            func(...args);
-            lastRan = Date.now();
-          }
-        }, limit - (Date.now() - (lastRan as number)));
-      }
-    };
-  }
-
   const flipCard = () => {
     if (!guessed && !flipped) {
       dispatchMemoryCat({
@@ -45,13 +25,11 @@ export const CatCard: React.FC<CatCardProps> = ({ index, card }) => {
     }
   };
 
-  const throttledFlipCard = throttle(flipCard, 600);
-
   return (
     <Card
       className={`flippable-card-container ${guessed ? '' : 'cursor-pointer'}`}
       style={{ backgroundColor: 'transparent' }}
-      onClick={throttledFlipCard}
+      onClick={flipCard}
     >
       <CSSTransition nodeRef={nodeRef} in={!flipped} timeout={600} classNames="flip">
         <div ref={nodeRef} className="card">
