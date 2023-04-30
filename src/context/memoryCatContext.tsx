@@ -12,8 +12,9 @@ const MemoryCatContext = createContext<MemoryCatContextType | null>(null);
 const initialState: MemoryCatType = {
   totalCards: 5,
   cardsToMatch: 2,
-  elapsedTime: '0',
-  bestRecordTime: 'none',
+  currentTime: 0,
+  timerOn: false,
+  bestTime: 999999999999999,
   gameStatus: 'GAME_MENU',
   cardsData: {
     selectedCards: [],
