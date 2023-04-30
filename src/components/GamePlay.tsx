@@ -15,7 +15,7 @@ export const GamePlay = () => {
           selectedCards[0] === selectedCards[1] ? 'SET_GUESSED_CARDS' : 'HIDE_FLIPPED_CARDS';
         setTimeout(() => {
           dispatchMemoryCat({ type: actionType });
-        }, 300);
+        }, 600);
       }
 
       const checkWinningCond = cardsData.cardList.every((card) => card.guessed === true);
