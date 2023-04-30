@@ -1,7 +1,10 @@
+import { Timer } from './Timer';
+
 export const Header = () => {
   return (
-    <header className="h-32 w-full flex  items-center">
-      <h1 className="mx-8 text-6xl font-bold">Memory Cat</h1>
+    <header className="h-32 w-full flex justify-between items-center px-8 font-bold">
+      <h1 className="text-6xl">Memory Cat</h1>
+      <Timer />
     </header>
   );
 };
