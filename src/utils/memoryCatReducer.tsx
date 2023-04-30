@@ -80,7 +80,10 @@ export const memoryCatReducer = (state: MemoryCatType, action: ActionTypes) => {
         break;
 
       case 'UPDATE_GAME_STATE':
-        if (action.payload === 'GAME_PLAY') draftState.timerOn = true;
+        if (action.payload === 'GAME_PLAY') {
+          draftState.currentTime = 0;
+          draftState.timerOn = true;
+        }
         if (action.payload === 'GAME_END') draftState.timerOn = false;
 
         draftState.gameStatus = action.payload;
