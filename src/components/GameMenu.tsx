@@ -22,23 +22,12 @@ export const GameMenu = () => {
     });
   };
 
-  const renderSlider = () => (
-    <Slider
-      aria-labelledby="sliderLabel"
-      valueLabelDisplay="auto"
-      value={stateMemoryCat.totalCards}
-      onChange={(e, value) => updateCardsNumber(value as number)}
-      min={2}
-      max={NUMBER_OF_CATS}
-    />
-  );
-
   return (
     <div className="mb-24 flex-auto flex flex-col justify-center items-center gap-8">
       <h2 className="text-4xl">How many cards do you want to play with?</h2>
       <Box width={400}>
         <p id="sliderLabel">Select the number of cards:</p>
-        {renderSlider()}
+        <MySlider totalCards={stateMemoryCat.totalCards} updateCardsNumber={updateCardsNumber} />
       </Box>
       <Button className={buttonStyle()} variant="outlined" onClick={updateGameState}>
         Start the game
@@ -46,3 +35,19 @@ export const GameMenu = () => {
     </div>
   );
 };
+
+type MySliderProps = {
+  totalCards: number;
+  updateCardsNumber: (value: number) => void;
+};
+
+const MySlider: React.FC<MySliderProps> = ({ totalCards, updateCardsNumber }) => (
+  <Slider
+    aria-labelledby="sliderLabel"
+    valueLabelDisplay="auto"
+    value={totalCards}
+    onChange={(_, value) => updateCardsNumber(value as number)}
+    min={2}
+    max={NUMBER_OF_CATS}
+  />
+);

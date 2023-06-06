@@ -3,22 +3,17 @@ import { GamePlay } from './GamePlay';
 import { GameEnd } from './GameEnd';
 import { useMemoryCatContext } from '../context/memoryCatContext';
 
-type StateComponentsType = {
-  [key: string]: JSX.Element;
-  GAME_MENU: JSX.Element;
-  GAME_PLAY: JSX.Element;
-  GAME_END: JSX.Element;
+type StateComponents = typeof stateComponents;
+const stateComponents = {
+  GAME_MENU: <GameMenu />,
+  GAME_PLAY: <GamePlay />,
+  GAME_END: <GameEnd />,
 };
 
 export const Game = () => {
   const { stateMemoryCat } = useMemoryCatContext();
   const { gameStatus } = stateMemoryCat;
+  const currentComponent = stateComponents[gameStatus as keyof StateComponents];
 
-  const stateComponents: StateComponentsType = {
-    GAME_MENU: <GameMenu />,
-    GAME_PLAY: <GamePlay />,
-    GAME_END: <GameEnd />,
-  };
-
-  return <>{stateComponents[gameStatus] || null}</>;
+  return <>{currentComponent}</>;
 };
